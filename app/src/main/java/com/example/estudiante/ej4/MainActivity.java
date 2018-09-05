@@ -1,69 +1,78 @@
 package com.example.estudiante.ej4;
 
+import android.app.Activity;
+import android.icu.text.StringSearch;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.Touch;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView lv_noticias;
-    NoticiaAdapter customAdapter;
-    EditText et_titulo;
-    Button btn_generar;
+    private ListView lv_contacto;
+    private ContactosAdapter customAdapter;
+    private EditText et_nombre;
+    private Button btn_generar;
+    private EditText et_telefono;
+    private Switch s_genero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        et_titulo= findViewById(R.id.et_titulo);
-        btn_generar= findViewById(R.id.btn_generar);
+        customAdapter = new ContactosAdapter(MainActivity.this);
 
-        lv_noticias= findViewById(R.id.lv_noticias);
-        customAdapter= new NoticiaAdapter(this);
-        lv_noticias.setAdapter(customAdapter);
 
-        //
-        Noticia noticia1= new Noticia("Cambio en hoy es diseño","Va a haber un cambio en el logo de hoy es diseño","13/2/2013");
+        et_nombre = findViewById(R.id.et_nombre);
+        btn_generar = findViewById(R.id.btn_generar);
+        et_telefono = findViewById(R.id.et_telefono);
+        lv_contacto = findViewById(R.id.lv_contacto);
+        s_genero = findViewById(R.id.s_genero);
 
-        Noticia noticia2= new Noticia("Titulo","descripcion","13/2/2013");
+        lv_contacto.setAdapter(customAdapter);
 
-        customAdapter.agregarNoticias(noticia1);
-        customAdapter.agregarNoticias(noticia2);
-
-        lv_noticias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        btn_generar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Noticia noticia_click= (Noticia) customAdapter.getItem(position);
-                Toast.makeText(MainActivity.this, noticia_click.getTitulo(),Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+
+                String nombre = et_nombre.getText().toString();
+                String telefono = et_telefono.getText().toString();
+                String genero = "";
+
+                if (s_genero.isChecked()) {
+                    genero = "femenino";
+                } else {
+                    genero = "masculino";
+                }
+
+
+                Contacto newContacto = new Contacto(nombre, telefono, genero);
+                if (nombre.equals("") && telefono.equals("")) {
+                    Toast.makeText(MainActivity.this, "ingrese datos validos", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    customAdapter.agregarContacto(newContacto);
+                }
+
+                et_nombre.setText("");
+                et_telefono.setText("");
+
+
             }
         });
-    btn_generar.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
 
-            // Traernos la fecha actual
-            Calendar c= Calendar.getInstance();
-            int year =c.get(Calendar.YEAR);
-            int month= c.get(Calendar.MONTH);
-            month++;
-            int day = c.get(Calendar.DAY_OF_MONTH);
-            String fecha= day+"/"+month+"/"+year;
-
-
-
-            String titulo=et_titulo.getText().toString();
-            Noticia newNoticia= new Noticia(titulo,"NO DESCRIPCION",fecha);
-            customAdapter.agregarNoticias(newNoticia);
-        }
-    });
+        //
 
     }
 }

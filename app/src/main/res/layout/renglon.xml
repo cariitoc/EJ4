@@ -1,38 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    android:background="#09568E"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:src="@drawable/mujer"
+        android:id="@+id/iv_genero"
+        android:layout_weight="1.5"
+        />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:id="@+id/item_titulo"
-        android:text="Titulo" />
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_marginTop="9dp"
+        >
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:id="@+id/tv_nombre"
+            android:text="vanesa" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:id="@+id/tv_telefono"
+            android:text="3133466533" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="15/10/2017"
-        android:gravity="right"
-        android:id="@+id/item_fecha"
-        android:textStyle="bold"/>
+        android:layout_weight="1.3">
 
-    <TextView
-        android:padding="10dp"
-        android:id="@+id/item_descripcion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="sds sdfsdf sdf sd fdsf dfg ggffggfdgfd ggfgfdgfd fgfdgdfggfgfd gdgfdgfgdfgfgdf gfg fdgdfg"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ib_call"
+            android:src="@android:drawable/ic_menu_call" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/item_action"
-        android:text="Ir a la noticia"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ib_delete"
+            android:src="@android:drawable/ic_delete" />
 
+
+    </LinearLayout>
+
+    <!--
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_call" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="" />
+            -->
 </LinearLayout>
